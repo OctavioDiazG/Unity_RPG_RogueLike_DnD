@@ -28,8 +28,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""id"": ""4cbdaeaa-8e9d-4ecf-b5ae-72aae0b7b60a"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""name"": ""Movement"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b823c6bf-bf0b-49d9-aa38-9546b34b349a"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -44,17 +44,26 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""c21ae4bd-d4d9-49ab-99b1-bc71de001742"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""WASD"",
                     ""id"": ""65df0ec0-c78b-462a-a154-55125ae6d92a"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +74,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -76,7 +85,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -87,7 +96,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -98,18 +107,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""091b7079-eb05-4dab-86df-5ff455ec08c2"",
+                    ""id"": ""2f977a6a-b395-4ddb-9141-12d16efc4f13"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -132,6 +141,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""091b7079-eb05-4dab-86df-5ff455ec08c2"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe90177f-6e75-436e-a487-babc4a75fe5d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -251,8 +282,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
 }");
         // BasicMovement
         m_BasicMovement = asset.FindActionMap("BasicMovement", throwIfNotFound: true);
-        m_BasicMovement_Move = m_BasicMovement.FindAction("Move", throwIfNotFound: true);
+        m_BasicMovement_Movement = m_BasicMovement.FindAction("Movement", throwIfNotFound: true);
         m_BasicMovement_Dodge = m_BasicMovement.FindAction("Dodge", throwIfNotFound: true);
+        m_BasicMovement_Camera = m_BasicMovement.FindAction("Camera", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
@@ -319,14 +351,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     // BasicMovement
     private readonly InputActionMap m_BasicMovement;
     private IBasicMovementActions m_BasicMovementActionsCallbackInterface;
-    private readonly InputAction m_BasicMovement_Move;
+    private readonly InputAction m_BasicMovement_Movement;
     private readonly InputAction m_BasicMovement_Dodge;
+    private readonly InputAction m_BasicMovement_Camera;
     public struct BasicMovementActions
     {
         private @PlayerInputActions m_Wrapper;
         public BasicMovementActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_BasicMovement_Move;
+        public InputAction @Movement => m_Wrapper.m_BasicMovement_Movement;
         public InputAction @Dodge => m_Wrapper.m_BasicMovement_Dodge;
+        public InputAction @Camera => m_Wrapper.m_BasicMovement_Camera;
         public InputActionMap Get() { return m_Wrapper.m_BasicMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,22 +370,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_BasicMovementActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMove;
+                @Movement.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnMovement;
                 @Dodge.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
+                @Camera.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
             }
             m_Wrapper.m_BasicMovementActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
             }
         }
     }
@@ -432,8 +472,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     public CombatActions @Combat => new CombatActions(this);
     public interface IBasicMovementActions
     {
-        void OnMove(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {

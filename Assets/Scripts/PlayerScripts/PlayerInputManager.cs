@@ -5,11 +5,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public Vector2 movementVector;
+    //public Vector2 movementVector;
     public bool wantsToLight;
     public bool wantsToHeavy;
+    
+    //New
+    public float horizontal;
+    public float vertical;
+    public float moveAmount;
+    public float mouseX;
+    public  float mouseY;
 
-    private PlayerInputActions playerInputs;
+    PlayerInputActions playerInputs;
+    
+    Vector2 movementInput;
+    Vector2 cameraInput;
 
     void Awake()
     {
@@ -18,6 +28,14 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnEnable()
     {
+        //new
+        if (playerInputs != null)
+        {
+            playerInputs = new PlayerInputActions();
+            playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
+            playerInputs.BasicMovement.Camera.performed += ctx => CameraInput(ctx);
+        }
+        
         playerInputs.Enable();
     }
     private void OnDisable()
@@ -31,8 +49,22 @@ public class PlayerInputManager : MonoBehaviour
         playerInputs.Combat.HeavyAttack.performed += ctx => HeavyAttackInput(ctx);
 
         //Movimiento
-        playerInputs.BasicMovement.Move.performed += ctx => MovementInput(ctx);
-        playerInputs.BasicMovement.Move.canceled += ctx => MovementInputZero(ctx);
+        playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
+        playerInputs.BasicMovement.Movement.canceled += ctx => MovementInputZero(ctx);
+    }
+
+    public void TickInput(float delta)
+    {
+        MoveInput(delta);
+    }
+    
+    private void MoveInput (float delta)
+    {
+        horizontal = movementInput.x;
+        vertical = movementInput.y;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+        mouseX = cameraInput.x;
+        mouseY = cameraInput.y;
     }
 
     void LightAttackInput(InputAction.CallbackContext context)
@@ -67,12 +99,17 @@ public class PlayerInputManager : MonoBehaviour
 
     void MovementInput(InputAction.CallbackContext context)
     {
-        movementVector = context.ReadValue<Vector2>();
+        movementInput = context.ReadValue<Vector2>();
+    }
+    
+    void CameraInput(InputAction.CallbackContext context)
+    {
+        cameraInput = context.ReadValue<Vector2>();
     }
 
     void MovementInputZero(InputAction.CallbackContext context)
     {
-        movementVector = new Vector2();
+        movementInput = new Vector2();
     }
 
     void Tester(InputAction.CallbackContext context)
