@@ -13,13 +13,10 @@ public class PlayerInputManager : MonoBehaviour
     public float horizontal;
     public float vertical;
     public float moveAmount;
-    public float mouseX;
-    public  float mouseY;
 
     PlayerInputActions playerInputs;
     
-    Vector2 movementInput;
-    Vector2 cameraInput;
+    public Vector2 movementInput;
 
     void Awake()
     {
@@ -33,7 +30,6 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerInputs = new PlayerInputActions();
             playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
-            playerInputs.BasicMovement.Camera.performed += ctx => CameraInput(ctx);
         }
         
         playerInputs.Enable();
@@ -63,8 +59,6 @@ public class PlayerInputManager : MonoBehaviour
         horizontal = movementInput.x;
         vertical = movementInput.y;
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-        mouseX = cameraInput.x;
-        mouseY = cameraInput.y;
     }
 
     void LightAttackInput(InputAction.CallbackContext context)
@@ -100,11 +94,6 @@ public class PlayerInputManager : MonoBehaviour
     void MovementInput(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-    }
-    
-    void CameraInput(InputAction.CallbackContext context)
-    {
-        cameraInput = context.ReadValue<Vector2>();
     }
 
     void MovementInputZero(InputAction.CallbackContext context)

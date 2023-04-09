@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
-    public Transform cameraObject;
     PlayerInputManager playerInputManager;
     Vector3 moveDirection;
     
@@ -16,7 +16,6 @@ public class PlayerLocomotion : MonoBehaviour
     
     
     public new Rigidbody rigidbody;
-    public GameObject normalCamera;
 
     [Header("Stats")] 
     [SerializeField] float movementSpeed = 5f;
@@ -26,19 +25,22 @@ public class PlayerLocomotion : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerInputManager = GetComponent<PlayerInputManager>();
         animationHandler = GetComponentInChildren<AnimationHandler>();
-        //cameraObject = Camera.main.transform;
         myTransform = transform;
         animationHandler.Initialize();
     }
 
     public void Update()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         float delta = Time.deltaTime;
         playerInputManager.TickInput(delta);
+        Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
 
-        moveDirection = cameraObject.forward * playerInputManager.vertical;//AD
-        moveDirection += cameraObject.right * playerInputManager.horizontal; //WS
-        moveDirection.Normalize();
+        moveDirection = _input.ToIso();
 
         float speed = movementSpeed;
         moveDirection *= speed;
@@ -54,7 +56,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
-    #region Movement
+    #region Rotation
 
     Vector3 normalVector;
     Vector3 targetPosition;
@@ -62,19 +64,19 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleRotation(float delta)
     {
         Vector3 targetDirection = Vector3.zero;
+        Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
         float moveOverride = playerInputManager.moveAmount;
-        targetDirection = cameraObject.forward * playerInputManager.vertical;//AD
-        targetDirection += cameraObject.right * playerInputManager.horizontal;//WS
-        targetDirection.Normalize();
+        targetDirection = (transform.position + _input.ToIso()) - transform.position;
         targetDirection.y = 0;
-        
+
+
         if (targetDirection == Vector3.zero)
             targetDirection = myTransform.forward;
         
         float rs = rotationSpeed;
         
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(myTransform.rotation, targetRotation, delta * rotationSpeed);
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        Quaternion playerRotation = Quaternion.Slerp(myTransform.rotation, targetRotation, delta * rs);
         myTransform.rotation = playerRotation;
     }
 
