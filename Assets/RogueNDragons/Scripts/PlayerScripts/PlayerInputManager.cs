@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour
     //public Vector2 movementVector;
     public bool wantsToLight;
     public bool wantsToHeavy;
+    public bool wantsToDodge;
     
     //New
     public float horizontal;
@@ -47,6 +48,23 @@ public class PlayerInputManager : MonoBehaviour
         //Movimiento
         playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
         playerInputs.BasicMovement.Movement.canceled += ctx => MovementInputZero(ctx);
+        
+        //Dodge
+        playerInputs.BasicMovement.Dodge.performed += ctx => DodgeInput(ctx);
+    }
+
+    private void DodgeInput(InputAction.CallbackContext ctx)
+    {
+        StopCoroutine(CancelDodgeCoroutine());
+        wantsToDodge = true;
+        
+        StartCoroutine(CancelDodgeCoroutine());
+    }
+
+    IEnumerator CancelDodgeCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        wantsToDodge= false;
     }
 
     public void TickInput(float delta)

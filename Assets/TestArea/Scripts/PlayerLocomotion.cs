@@ -29,12 +29,12 @@ public class PlayerLocomotion : MonoBehaviour
         animationHandler.Initialize();
     }
 
-    public void Update()
+    /*public void Update()
     {
         Move();
-    }
+    }*/
 
-    private void Move()
+    public void Move()
     {
         float delta = Time.deltaTime;
         playerInputManager.TickInput(delta);
@@ -61,7 +61,7 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 normalVector;
     Vector3 targetPosition;
     
-    private void HandleRotation(float delta)
+    public void HandleRotation(float delta)
     {
         Vector3 targetDirection = Vector3.zero;
         Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
