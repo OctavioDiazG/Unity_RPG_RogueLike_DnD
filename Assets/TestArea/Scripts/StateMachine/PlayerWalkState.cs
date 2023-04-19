@@ -18,5 +18,11 @@ public class PlayerWalkState : PlayerState
         machine.playerLocomotion.Move();
         if (machine.playerInputManager.wantsToDodge)
             machine.SetState(machine.DodgeState);
+
+        if (machine.playerInputManager.wantsToPrimaryAttack)
+            machine.SetState(machine.PrimaryAttackState);
+        
+        if (machine.playerInputManager.wantsToSecondaryAttack)
+            machine.SetState(machine.SecondaryAttackState);
     }
 }

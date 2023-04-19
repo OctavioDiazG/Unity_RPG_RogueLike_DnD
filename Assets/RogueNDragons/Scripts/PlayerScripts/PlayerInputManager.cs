@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour
 {
     //public Vector2 movementVector;
-    public bool wantsToLight;
-    public bool wantsToHeavy;
+    public bool wantsToPrimaryAttack;
+    public bool wantsToSecondaryAttack;
     public bool wantsToDodge;
     
     //New
@@ -44,6 +44,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         //Combate
         playerInputs.Combat.HeavyAttack.performed += ctx => HeavyAttackInput(ctx);
+        playerInputs.Combat.LightAttack.performed += ctx => LightAttackInput(ctx);
 
         //Movimiento
         playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
@@ -82,7 +83,7 @@ public class PlayerInputManager : MonoBehaviour
     void LightAttackInput(InputAction.CallbackContext context)
     {
         StopCoroutine(CancelLightAttackCoroutine());
-        wantsToHeavy = true;
+        wantsToPrimaryAttack = true;
         
         StartCoroutine(CancelLightAttackCoroutine());
     }
@@ -90,14 +91,14 @@ public class PlayerInputManager : MonoBehaviour
     IEnumerator CancelLightAttackCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
-        wantsToLight= false;
+        wantsToPrimaryAttack= false;
 
     }
 
     void HeavyAttackInput(InputAction.CallbackContext context)
     {
         StopCoroutine(CancelHeavyAttackCoroutine());
-        wantsToHeavy = true;
+        wantsToSecondaryAttack = true;
         Debug.Log("Heavy");
         StartCoroutine(CancelHeavyAttackCoroutine());
     }
@@ -105,7 +106,7 @@ public class PlayerInputManager : MonoBehaviour
     IEnumerator CancelHeavyAttackCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
-        wantsToHeavy = false;
+        wantsToSecondaryAttack = false;
         Debug.Log("Heavy Canceled");
     }
 

@@ -12,12 +12,16 @@ public class PlayerStateMachine : MonoBehaviour
     
     private PlayerState walkState = new PlayerWalkState();
     private PlayerState dodgeState = new PlayerDodgeState();
+    private PlayerState primaryAttackState = new PlayerPrimaryAttackState();
+    private PlayerState secondaryAttackState = new PlayerSecondaryAttackState();
     
     public PlayerLocomotion playerLocomotion => m_playerLocomotion;
     public PlayerInputManager playerInputManager => m_playerInputManager;
     
     public PlayerState WalkState => walkState;
     public PlayerState DodgeState => dodgeState;
+    public PlayerState PrimaryAttackState => primaryAttackState;
+    public PlayerState SecondaryAttackState => secondaryAttackState;
 
     private void Awake()
     {

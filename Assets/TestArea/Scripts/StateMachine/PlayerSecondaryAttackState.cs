@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDodgeState : PlayerState
+public class PlayerSecondaryAttackState : PlayerState
 {
     public override void OnEnter(PlayerStateMachine machine)
     {
-        Debug.Log("Entrando a Dodge");
+        Debug.Log("Entrando a Secondary Attack");
     }
 
     public override void OnUpdate(PlayerStateMachine machine)
@@ -14,6 +16,6 @@ public class PlayerDodgeState : PlayerState
 
     public override void OnExit(PlayerStateMachine machine)
     {
-        Debug.Log("Saliendo de Dodge");
+        Debug.Log("Saliendo de Secondary Attack");
     }
 }
