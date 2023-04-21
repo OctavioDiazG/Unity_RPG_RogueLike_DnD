@@ -28,7 +28,7 @@ public class PlayerLocomotion : MonoBehaviour
         myTransform = transform;
         animationHandler.Initialize();
     }
-
+    
     /*public void Update()
     {
         Move();

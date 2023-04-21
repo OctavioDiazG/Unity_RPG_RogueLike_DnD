@@ -84,7 +84,6 @@ public class PlayerInputManager : MonoBehaviour
     {
         StopCoroutine(CancelLightAttackCoroutine());
         wantsToPrimaryAttack = true;
-        
         StartCoroutine(CancelLightAttackCoroutine());
     }
 
