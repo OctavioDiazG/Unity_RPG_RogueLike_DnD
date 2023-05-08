@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    //public Vector2 movementVector;
     public bool wantsToPrimaryAttack;
     public bool wantsToSecondaryAttack;
     public bool wantsToDodge;
+    public bool wantsToInteract;
     
     //New
     public float horizontal;
@@ -52,7 +53,24 @@ public class PlayerInputManager : MonoBehaviour
         
         //Dodge
         playerInputs.BasicMovement.Dodge.performed += ctx => DodgeInput(ctx);
+
+        //Interact
+        playerInputs.Interaction.Interact.performed += ctx => InteractInput(ctx);
     }
+
+    private void InteractInput(InputAction.CallbackContext ctx)
+    {
+        //StopCoroutine(CancelInteractCoroutine());
+        wantsToInteract = true;
+
+        //StartCoroutine(CancelInteractCoroutine());
+    }
+
+    /*IEnumerator CancelInteractCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        wantsToInteract = false;
+    }*/
 
     private void DodgeInput(InputAction.CallbackContext ctx)
     {
