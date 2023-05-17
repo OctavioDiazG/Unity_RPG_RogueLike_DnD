@@ -13,11 +13,11 @@ public class CameraFollow : MonoBehaviour
     {
         switch (offset.x)
         {
-            case >= 10.0f:
-                offset = new Vector3(9.99f, 12.0f, 10.0f);
+            case >= 6.0f:
+                offset = new Vector3(5.99f, 8.0f, 6.0f);
                 break;
-            case <= 3.0f:
-                offset = new Vector3(3.01f, 5.0f, 3.0f);
+            case <= 1.0f:
+                offset = new Vector3(1.01f, 3.0f, 1.0f);
                 break;
             default:
                 offset -= new Vector3(Input.mouseScrollDelta.y,Input.mouseScrollDelta.y,Input.mouseScrollDelta.y);
