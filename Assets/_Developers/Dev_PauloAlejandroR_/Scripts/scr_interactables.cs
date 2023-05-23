@@ -26,4 +26,6 @@ public abstract class scr_interactables : MonoBehaviour
     {
         gameObject.GetComponent<SphereCollider>().enabled = false;
     }
+
+    public abstract void resultBehaviour(int result);
 }
