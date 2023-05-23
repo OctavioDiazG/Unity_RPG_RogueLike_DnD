@@ -4,5 +4,5 @@ using UnityEngine;
 
 interface IRollable 
 {
-    public int Roll(int diceType);
+    public void Roll(int diceType);
 }

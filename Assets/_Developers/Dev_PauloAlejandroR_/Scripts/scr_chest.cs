@@ -8,15 +8,19 @@ public class scr_chest : scr_interactables, IRollable
     {
         base.Interact();
         Debug.Log("cofre");
-        Debug.Log(Roll(20));
+        Roll(20);
     }
-
-    public int Roll(int diceType)
+   
+    public void Roll(int diceType)
     {
         int rand = Random.Range(1, diceType);
 
-        
-
-        return rand;
+        StartCoroutine(scr_diceRoll.RollAnimCoroutine(diceType, rand, this));
     }
+
+    public override void resultBehaviour(int result)
+    {
+        Debug.Log(result);
+    }
+
 }

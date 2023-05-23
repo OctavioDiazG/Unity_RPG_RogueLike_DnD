@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class scr_diceRoll : MonoBehaviour
 {
-    public static void xd(int diceType, scr_interactables interactingObject)
+    public static IEnumerator RollAnimCoroutine(int diceType, int result, scr_interactables interactingObject)
     {
-        
-    }
-
-    private static IEnumerator juan()
-    {
+        //Aqui ocurre la Anim
         yield return new WaitForSeconds(2);
-
-
+        interactingObject.resultBehaviour(result);
     }
 }
