@@ -11,8 +11,18 @@ public class CameraFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        offset -= new Vector3(Input.mouseScrollDelta.y,Input.mouseScrollDelta.y,Input.mouseScrollDelta.y);
-        
+        switch (offset.x)
+        {
+            case >= 6.0f:
+                offset = new Vector3(5.99f, 8.0f, 6.0f);
+                break;
+            case <= 1.0f:
+                offset = new Vector3(1.01f, 3.0f, 1.0f);
+                break;
+            default:
+                offset -= new Vector3(Input.mouseScrollDelta.y,Input.mouseScrollDelta.y,Input.mouseScrollDelta.y);
+                break;
+        }
         var desiredPosition = target.position + offset;
         var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
