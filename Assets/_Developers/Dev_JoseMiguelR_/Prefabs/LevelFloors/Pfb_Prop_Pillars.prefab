@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 38606189021325095}
   - component: {fileID: 38606189017900927}
   - component: {fileID: 38606189018913255}
+  - component: {fileID: 3162196004697022079}
   m_Layer: 0
   m_Name: Pfb_Prop_Pillar_Square_05 (1)
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3162196004697022079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38606189020852303}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0607805, y: 2.825653, z: 1.0605259}
+  m_Center: {x: 0.00000047683716, y: 1.4128265, z: 0.0000009536743}
 --- !u!1 &1942164364672289626
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +108,7 @@ GameObject:
   - component: {fileID: 1942164364671949874}
   - component: {fileID: 1942164364669082730}
   - component: {fileID: 1942164364670034674}
+  - component: {fileID: 8612635831481530475}
   m_Layer: 0
   m_Name: Pfb_Prop_Pillar_Square_05 (3)
   m_TagString: Untagged
@@ -166,6 +181,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8612635831481530475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942164364672289626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0607805, y: 2.825653, z: 1.0605259}
+  m_Center: {x: 0.00000047683716, y: 1.4128265, z: 0.0000009536743}
 --- !u!1 &3281980539436745384
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +205,7 @@ GameObject:
   - component: {fileID: 3281980539436275136}
   - component: {fileID: 3281980539437602200}
   - component: {fileID: 3281980539438754560}
+  - component: {fileID: 8572886109834135974}
   m_Layer: 0
   m_Name: Pfb_Prop_Pillar_Square_05 (2)
   m_TagString: Untagged
@@ -249,6 +278,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8572886109834135974
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281980539436745384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0607805, y: 2.825653, z: 1.0605259}
+  m_Center: {x: 0.00000047683716, y: 1.4128265, z: 0.0000009536743}
 --- !u!1 &3907690432659537087
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +337,7 @@ GameObject:
   - component: {fileID: 6102472766876353677}
   - component: {fileID: 6102472766875583701}
   - component: {fileID: 6102472766874516045}
+  - component: {fileID: 7081956468034834926}
   m_Layer: 0
   m_Name: Pfb_Prop_Pillar_Square_05
   m_TagString: Untagged
@@ -367,3 +410,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7081956468034834926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102472766876701669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0607805, y: 2.825653, z: 1.0605259}
+  m_Center: {x: 0.00000047683716, y: 1.4128265, z: 0.0000009536743}

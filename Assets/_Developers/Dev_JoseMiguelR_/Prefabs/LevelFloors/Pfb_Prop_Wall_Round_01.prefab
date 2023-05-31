@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8898248507291680487}
   - component: {fileID: 8898248507294547307}
   - component: {fileID: 8898248507293474151}
+  - component: {fileID: 5900830132772989362}
   m_Layer: 0
   m_Name: Pfb_Prop_Wall_Round_01
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5900830132772989362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898248507291448899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.13939, y: 5.04309, z: 4.8563538}
+  m_Center: {x: 0, y: 2.521545, z: 0.020950317}
