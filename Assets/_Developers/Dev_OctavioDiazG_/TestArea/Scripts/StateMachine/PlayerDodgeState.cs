@@ -12,7 +12,7 @@ public class PlayerDodgeState : PlayerState
         }
         else
         {
-            machine.playerLocomotion.Dodge.Dodge(Vector3.forward.ToIso());
+            //machine.playerLocomotion.Dodge.Dodge(Vector3.forward.ToIso());
         }
         
     }

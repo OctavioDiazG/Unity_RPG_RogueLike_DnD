@@ -15,14 +15,31 @@ public class PlayerInputManager : MonoBehaviour
     public float horizontal;
     public float vertical;
     public float moveAmount;
+    public float mouseX;   
+    public float mouseY;   
+    
 
     PlayerInputActions playerInputs;
+    private CameraHandler cameraHandler;
     
     public Vector2 movementInput;
+    public Vector2 cameraInput;
 
     void Awake()
     {
+        cameraHandler = CameraHandler.singleton;
         playerInputs = new PlayerInputActions();
+    }
+
+    private void FixedUpdate()
+    {
+        float delta = Time.fixedDeltaTime;
+
+        if (cameraHandler != null)
+        {
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
+        }
     }
 
     private void OnEnable()
@@ -32,6 +49,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             playerInputs = new PlayerInputActions();
             playerInputs.BasicMovement.Movement.performed += ctx => MovementInput(ctx);
+            playerInputs.BasicMovement.Camera.performed += ctx => CameraInput(ctx);
         }
         
         playerInputs.Enable();
@@ -96,6 +114,9 @@ public class PlayerInputManager : MonoBehaviour
         horizontal = movementInput.x;
         vertical = movementInput.y;
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+        mouseX = cameraInput.x;
+        mouseY = cameraInput.y;
+        
     }
 
     void LightAttackInput(InputAction.CallbackContext context)
@@ -130,6 +151,11 @@ public class PlayerInputManager : MonoBehaviour
     void MovementInput(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+    }
+    
+    void CameraInput(InputAction.CallbackContext context)
+    {
+          cameraInput = context.ReadValue<Vector2>();   
     }
 
     void MovementInputZero(InputAction.CallbackContext context)
