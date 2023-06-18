@@ -46,9 +46,9 @@ public class CameraHandler : MonoBehaviour
    {
       Vector3 targetPosition = Vector3.SmoothDamp(playerTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
       playerTransform.position = targetPosition;
-      //HandleCameraCollision(delta);
+      //HandleCameraCollisions(delta);  //doesnt work as intended 
    }
-   
+    
    public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
    {
       lookAngle += (mouseXInput * lookSpeed) / delta;
@@ -65,8 +65,8 @@ public class CameraHandler : MonoBehaviour
       targetRotation = Quaternion.Euler(rotation);
       cameraPivotTransform.localRotation = targetRotation;
    }
-   
-   /*private void HandleCameraCollision(float delta)
+
+   private void HandleCameraCollisions(float delta)
    {
       targetPosition = defaultPosition;
       RaycastHit hit;
@@ -75,16 +75,15 @@ public class CameraHandler : MonoBehaviour
       
       if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, direction, out hit, Mathf.Abs(targetPosition), ignoreLayers))
       {
-         float distance = Vector3.Distance(cameraPivotTransform.position, hit.point);
-         targetPosition = -(distance - cameraCollisionOffset);
+         float dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
+         targetPosition = -(dis - cameraCollisionOffset);
       }
-
+      
       if (Mathf.Abs(targetPosition) < minimumCollisionOffset)
       {
          targetPosition = -minimumCollisionOffset;
       }
-      
       cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, delta / 0.2f);
       cameraTransform.localPosition = cameraTransformPosition;
-   }*/
+   }
 }

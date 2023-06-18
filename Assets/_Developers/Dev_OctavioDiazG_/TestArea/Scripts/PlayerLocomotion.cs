@@ -44,19 +44,15 @@ public class PlayerLocomotion : MonoBehaviour
         Dodge = GetComponent<IDodge>();
     }
     
-    /*public void Update()
+    public void Update()
     {
-        Move();
-    }*/
-
-    public void Move()
-    {
-        //Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, cameraObject.transform.rotation.y, 0));
-
-
         float delta = Time.deltaTime;
         playerInputManager.TickInput(delta);
-        //Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
+        HandleRotation(delta);
+    }
+
+    public void HandleMovement(float delta)
+    {
 
         moveDirection = cameraObject.forward * playerInputManager.vertical;
         moveDirection += cameraObject.right * playerInputManager.horizontal;
