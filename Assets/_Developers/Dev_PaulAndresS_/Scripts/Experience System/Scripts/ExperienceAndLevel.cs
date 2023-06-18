@@ -15,17 +15,19 @@ public class ExperienceAndLevel : MonoBehaviour, IExperience, ILevel
     [SerializeField] private int mExperiencePerLevel = 100;
     [SerializeField] private int mMultiplierPerLevel = 3;
 
+    public int UseExperience;
     public int Experience => mExperience;
     public int Level => mLevel;
 
     private void Start()
     {
         tLevel.text = "" + mLevel;
+        UseExperience = 1;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKey(KeyCode.H))
         {
             AddExperience(10);
         }
@@ -75,5 +77,6 @@ public class ExperienceAndLevel : MonoBehaviour, IExperience, ILevel
         // Evita que sea negativa y añade la experiencia
         level = Mathf.Abs(level);
         mLevel += level;
+        UseExperience += level;
     }
 }
