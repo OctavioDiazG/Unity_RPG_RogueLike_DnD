@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    [SerializeField]
     Transform cameraObject;
     PlayerInputManager playerInputManager;
     Vector3 moveDirection;
@@ -22,11 +23,9 @@ public class PlayerLocomotion : MonoBehaviour
     
     public Vector3 targetDirection = Vector3.zero;
 
-    public GameObject normalCamera;
-    
-    
-    
-    
+
+
+
     public new Rigidbody rigidbody;
 
     [Header("Stats")] 
@@ -37,7 +36,7 @@ public class PlayerLocomotion : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerInputManager = GetComponent<PlayerInputManager>();
         animationHandler = GetComponentInChildren<AnimationHandler>();
-        cameraObject = Camera.main.transform;
+        //cameraObject = Camera.main.transform;
         myTransform = transform;
         animationHandler.Initialize();
 
@@ -47,8 +46,10 @@ public class PlayerLocomotion : MonoBehaviour
     public void Update()
     {
         float delta = Time.deltaTime;
+        
         playerInputManager.TickInput(delta);
         HandleRotation(delta);
+        HandleRollingAndSprinting(delta);
     }
 
     public void HandleMovement(float delta)
@@ -127,6 +128,37 @@ public class PlayerLocomotion : MonoBehaviour
         Quaternion playerRotation = Quaternion.Slerp(myTransform.rotation, targetRotation, delta * rs);
         myTransform.rotation = playerRotation;
         */
+    }
+    
+    public void HandleRollingAndSprinting(float delta)
+    {
+        if (animationHandler.anim.GetBool("isInteracting"))
+        {   
+            return;
+        }
+        
+        if (playerInputManager.wantsToDodge)
+        {
+            Debug.Log("MoveDirection = Camera.forward");
+            moveDirection = cameraObject.forward * playerInputManager.vertical;
+            moveDirection += cameraObject.right * playerInputManager.horizontal;
+
+            if (playerInputManager.moveAmount > 0)
+            {
+                animationHandler.PlayTargetAnimation("ForwardRolling",true);
+                moveDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                myTransform.rotation = rollRotation;
+                Debug.Log("Can Roll Forward");
+                
+            }
+            else
+            {
+                animationHandler.PlayTargetAnimation("BackwardRolling",true);
+                Debug.Log("Can Roll Backward");
+                
+            }
+        }
     }
 
     #endregion

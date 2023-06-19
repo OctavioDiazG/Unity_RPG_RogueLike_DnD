@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     public Animator anim;
+    public PlayerInputManager playerInputManager;
+    public PlayerLocomotion playerLocomotion;
     int vertical;
     int horizontal;
     public bool canRotate;
@@ -12,6 +15,8 @@ public class AnimationHandler : MonoBehaviour
     public void Initialize()
     {
         anim = GetComponent<Animator>();
+        playerInputManager = GetComponentInParent<PlayerInputManager>();
+        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
@@ -87,6 +92,20 @@ public class AnimationHandler : MonoBehaviour
     public void StopRotation()
     {
         canRotate = false;
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (playerInputManager.isInteracting == false) 
+            return;
+        
+        float delta = Time.deltaTime;
+        playerLocomotion.rigidbody.drag = 0;
+        Vector3 deltaPosition = anim.deltaPosition;
+        deltaPosition.y = 0;
+        Vector3 velocity = deltaPosition / delta;
+        playerLocomotion.rigidbody.velocity = velocity;
+        
     }
 }
 

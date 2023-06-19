@@ -39,14 +39,19 @@ public class CameraHandler : MonoBehaviour
       singleton = this;
       playerTransform = transform;
       defaultPosition = cameraTransform.localPosition.z;
-      ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+      //ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+   }
+
+   private void Start()
+   {
+      Application.targetFrameRate = 120;
    }
 
    public void FollowTarget(float delta)
    {
       Vector3 targetPosition = Vector3.SmoothDamp(playerTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
       playerTransform.position = targetPosition;
-      //HandleCameraCollisions(delta);  //doesnt work as intended 
+      HandleCameraCollisions(delta);  //doesnt work as intended 
    }
     
    public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
@@ -84,6 +89,7 @@ public class CameraHandler : MonoBehaviour
          targetPosition = -minimumCollisionOffset;
       }
       cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, delta / 0.2f);
+      cameraTransformPosition.y = 7.5f;
       cameraTransform.localPosition = cameraTransformPosition;
    }
 }

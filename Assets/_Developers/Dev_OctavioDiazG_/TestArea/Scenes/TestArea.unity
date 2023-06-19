@@ -203,11 +203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494616864931a4c8899b8a930fb2c7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObject: {fileID: 84049360}
   myTransform: {fileID: 0}
   animationHandler: {fileID: 0}
   changeState: 0
   targetDirection: {x: 0, y: 0, z: 0}
-  normalCamera: {fileID: 0}
   rigidbody: {fileID: 0}
   movementSpeed: 5
   rotationSpeed: 10
@@ -232,6 +232,9 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
+  b_input: 0
+  rollFlag: 0
+  isInteracting: 0
   movementInput: {x: 0, y: 0}
   cameraInput: {x: 0, y: 0}
 --- !u!114 &40107604
@@ -281,11 +284,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 750947951}
   cameraPivotTransform: {fileID: 1405616437}
   cameraTransformPosition: {x: 0, y: 0, z: 0}
-  lookSpeed: 0.06
+  lookSpeed: 0.1
   followSpeed: 0.15
   pivotSpeed: 0.01
-  minimumPivot: -5
-  maximumPivot: 5
+  minimumPivot: -10
+  maximumPivot: 10
   cameraSphereRadius: 0.2
   cameraCollisionOffset: 0.2
   minimumCollisionOffset: 0.2
@@ -297,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84049358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.478, y: 0.245, z: -3.582}
+  m_LocalPosition: {x: 1.478, y: 0, z: -3.582}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -340,7 +343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0.94, y: -0.000022888}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &141276616
@@ -589,7 +592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8313839, y: 0.679}
   m_AnchorMax: {x: 0.9768786, y: 0.9483637}
-  m_AnchoredPosition: {x: 0.6300049, y: -0.1800232}
+  m_AnchoredPosition: {x: 0.6300049, y: -0.17999268}
   m_SizeDelta: {x: -2.7999878, y: -0.36799622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &330773885
@@ -744,6 +747,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 442184671}
+  playerInputManager: {fileID: 0}
+  playerLocomotion: {fileID: 0}
   canRotate: 1
 --- !u!95 &442184671 stripped
 Animator:
@@ -905,14 +910,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750947950}
-  m_LocalRotation: {x: 0.36650118, y: 0, z: 0, w: 0.9304176}
-  m_LocalPosition: {x: 0, y: 7.17, z: -6.72}
+  m_LocalRotation: {x: 0.3907311, y: 0, z: 0, w: 0.9205049}
+  m_LocalPosition: {x: 0, y: 7.5, z: -8.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1405616437}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 43, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46, y: 0, z: 0}
 --- !u!81 &750947952
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1228,6 +1233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  playerInputManager: {fileID: 0}
+  playerLocomotion: {fileID: 0}
   canRotate: 1
 --- !u!1 &1238050904
 GameObject:
@@ -1263,7 +1270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: -0.000015259, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1287672313
@@ -1760,6 +1767,7 @@ GameObject:
   - component: {fileID: 1784078206}
   - component: {fileID: 1784078205}
   - component: {fileID: 1784078204}
+  - component: {fileID: 1784078211}
   m_Layer: 13
   m_Name: Player (1)
   m_TagString: Untagged
@@ -1806,11 +1814,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494616864931a4c8899b8a930fb2c7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObject: {fileID: 84049360}
   myTransform: {fileID: 0}
   animationHandler: {fileID: 0}
   changeState: 0
   targetDirection: {x: 0, y: 0, z: 0}
-  normalCamera: {fileID: 84049358}
   rigidbody: {fileID: 0}
   movementSpeed: 5
   rotationSpeed: 10
@@ -1835,6 +1843,9 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
+  b_input: 0
+  rollFlag: 0
+  isInteracting: 0
   movementInput: {x: 0, y: 0}
   cameraInput: {x: 0, y: 0}
 --- !u!136 &1784078208
@@ -1883,6 +1894,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784078211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784078203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff76107acbc749b1802d0f79d1058f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1909114805
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,12 +11,19 @@ public class PlayerInputManager : MonoBehaviour
     public bool wantsToDodge;
     public bool wantsToInteract;
     
+    
+    
     //New
     public float horizontal;
     public float vertical;
     public float moveAmount;
     public float mouseX;   
     public float mouseY;   
+    
+    public bool b_input;
+    public bool rollFlag;
+    public bool isInteracting;
+    
     
 
     PlayerInputActions playerInputs;
@@ -95,6 +102,7 @@ public class PlayerInputManager : MonoBehaviour
         StopCoroutine(CancelDodgeCoroutine());
         wantsToDodge = true;
         
+        Debug.Log("Dodge Button pressed DodgeInput");
         StartCoroutine(CancelDodgeCoroutine());
     }
 
@@ -107,6 +115,7 @@ public class PlayerInputManager : MonoBehaviour
     public void TickInput(float delta)
     {
         MoveInput(delta);
+        //HandleRollInput(delta);
     }
     
     private void MoveInput (float delta)
@@ -118,6 +127,16 @@ public class PlayerInputManager : MonoBehaviour
         mouseY = cameraInput.y;
         
     }
+
+    /*private void HandleRollInput(float delta)
+    {
+        b_input = playerInputs.BasicMovement.Dodge.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+        if (b_input)
+        {
+            wantsToDodge = true;
+            Debug.Log("Dodge Button pressed HandleRollInput");
+        }
+    }*/
 
     void LightAttackInput(InputAction.CallbackContext context)
     {

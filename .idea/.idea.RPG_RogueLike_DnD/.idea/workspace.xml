@@ -6,12 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="25cdffe1-d422-4ada-a7c6-a9e51f06eb05" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RPG_RogueLike_DnD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RPG_RogueLike_DnD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RogueNDragons/Scripts/PlayerScripts/PlayerInputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RogueNDragons/Scripts/PlayerScripts/PlayerInputManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/Animations/Humanoid.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/Animations/Humanoid.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scenes/TestArea.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scenes/TestArea.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/AnimationHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/AnimationHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/CameraHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/CameraHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/PlayerLocomotion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/PlayerLocomotion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/StateMachine/PlayerWalkState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/StateMachine/PlayerWalkState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/StateMachine/PlayerDodgeState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/StateMachine/PlayerDodgeState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +22,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/12364d79f5784c07a5def232474fb055159400/79/3d0e84af/Matrix4x4.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/12364d79f5784c07a5def232474fb055159400/8a/f7a7b237/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a5eabe00351940b681f77e7c8b7a982d26e00/b6/d58f139a/Animator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/CameraHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/Interfaces/IDodge.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/PlayerCharacterSpecific/PaladinDodge.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Developers/Dev_OctavioDiazG_/TestArea/Scripts/ResetIsInteraction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.4.4/InputSystem/Actions/InputAction.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -117,7 +120,7 @@
       <workItem from="1684460685573" duration="4017000" />
       <workItem from="1686596509741" duration="11001000" />
       <workItem from="1687012088643" duration="21262000" />
-      <workItem from="1687064330862" duration="3232000" />
+      <workItem from="1687064330862" duration="13665000" />
     </task>
     <servers />
   </component>
