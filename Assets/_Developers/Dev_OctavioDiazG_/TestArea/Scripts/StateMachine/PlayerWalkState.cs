@@ -15,7 +15,7 @@ public class PlayerWalkState : PlayerState
 
     public override void OnUpdate(PlayerStateMachine machine)
     {
-        machine.playerLocomotion.Move();
+        machine.playerLocomotion.HandleMovement(Time.deltaTime);
         if (machine.playerInputManager.wantsToDodge)
             machine.SetState(machine.DodgeState);
 
