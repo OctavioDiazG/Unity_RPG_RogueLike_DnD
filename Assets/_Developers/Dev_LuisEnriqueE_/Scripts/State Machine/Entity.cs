@@ -10,7 +10,7 @@ public class Entity : MonoBehaviour
     
     public int facingDirection { get; private set; }
     
-    public Rigidbody2D rb { get; private set; }
+    public Rigidbody rb { get; private set; }
     public Animator anim { get; private set; }
     public GameObject aliveGo { get; private set; }
 
@@ -21,8 +21,10 @@ public class Entity : MonoBehaviour
 
     public virtual void Start()
     {
+        facingDirection = 1;
+        
         aliveGo = transform.Find("Alive").gameObject;
-        rb = aliveGo.GetComponent<Rigidbody2D>();
+        rb = aliveGo.GetComponent<Rigidbody>();
         anim = aliveGo.GetComponent<Animator>();
 
         stateMachine = new FiniteStateMachine();
@@ -46,13 +48,13 @@ public class Entity : MonoBehaviour
 
     public virtual bool CheckWall()
     {
-        return Physics2D.Raycast(wallCheck.position, aliveGo.transform.right, entityData.wallCheckDistance,
+        return Physics.Raycast(wallCheck.position, aliveGo.transform.right, entityData.wallCheckDistance,
             entityData.whatIsGround);
     }
     
     public virtual bool CheckLedge()
     {
-        return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance,
+        return Physics.Raycast(ledgeCheck.position, Vector3.down, entityData.ledgeCheckDistance,
             entityData.whatIsGround);
     }
 
