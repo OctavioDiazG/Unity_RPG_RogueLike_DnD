@@ -6,15 +6,8 @@ public class PlayerDodgeState : PlayerState
     { 
         Debug.Log("Enter Dodge State");
         machine.playerLocomotion.StateDelay(0.5f);
-        if (machine.playerLocomotion.targetDirection != Vector3.zero) 
-        {
-            machine.playerLocomotion.Dodge.Dodge(machine.playerLocomotion.targetDirection);
-        }
-        else
-        {
-            machine.playerLocomotion.Dodge.Dodge(Vector3.forward.ToIso());
-        }
-        
+        machine.playerLocomotion.HandleRollingAndSprinting(Time.deltaTime);
+
     }
 
     public override void OnUpdate(PlayerStateMachine machine)
