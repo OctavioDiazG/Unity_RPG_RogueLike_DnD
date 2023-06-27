@@ -6,7 +6,6 @@ public class IdleState : State
 {
     protected D_IdleState stateData;
 
-    protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
 
     protected float idleTime;
@@ -28,11 +27,6 @@ public class IdleState : State
     public override void Exit()
     {
         base.Exit();
-
-        if (flipAfterIdle)
-        {
-            entity.Flip();
-        }
     }
 
     public override void LogicUpdate()
@@ -50,10 +44,6 @@ public class IdleState : State
         base.PhysicsUpdate();
     }
 
-    public void SetFlipAfterIdle(bool flip)
-    {
-        flipAfterIdle = flip;
-    }
 
     private void SetRandomIdleTime()
     {

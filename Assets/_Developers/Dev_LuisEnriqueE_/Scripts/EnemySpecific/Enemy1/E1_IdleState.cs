@@ -29,6 +29,11 @@ public class E1_IdleState : IdleState
         {
             stateMachine.ChangeState(enemy.moveState);
         }
+
+        if (entity.CheckPlayerChase())
+        {
+            stateMachine.ChangeState(enemy.chaseState);
+        }
     }
 
     public override void PhysicsUpdate()
