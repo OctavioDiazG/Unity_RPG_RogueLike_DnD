@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitelSceen : MonoBehaviour
@@ -28,6 +29,11 @@ public class TitelSceen : MonoBehaviour
         if(col < 254){
             col++;
         }
+    }
+
+    public void ChangeLevel(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 
 }
