@@ -27,20 +27,20 @@ public class PlayerInputManager : MonoBehaviour
     
 
     PlayerInputActions playerInputs;
-    private CameraHandler cameraHandler;
+    public CameraHandler cameraHandler;
     
     public Vector2 movementInput;
     public Vector2 cameraInput;
 
     void Awake()
     {
-        cameraHandler = CameraHandler.singleton;
+        //cameraHandler = CameraHandler.singleton;
         playerInputs = new PlayerInputActions();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        float delta = Time.fixedDeltaTime;
+        float delta = Time.deltaTime;
 
         if (cameraHandler != null)
         {
@@ -174,7 +174,7 @@ public class PlayerInputManager : MonoBehaviour
     
     void CameraInput(InputAction.CallbackContext context)
     {
-          cameraInput = context.ReadValue<Vector2>();   
+        cameraInput = Mouse.current.delta.ReadValue();
     }
 
     void MovementInputZero(InputAction.CallbackContext context)

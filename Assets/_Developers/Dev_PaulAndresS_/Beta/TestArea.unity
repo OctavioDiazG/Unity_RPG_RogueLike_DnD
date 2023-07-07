@@ -188,11 +188,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 750947951}
   cameraPivotTransform: {fileID: 1405616437}
   cameraTransformPosition: {x: 0, y: 0, z: 0}
-  lookSpeed: 0.1
+  lookSpeed: 0.005
   followSpeed: 0.15
   pivotSpeed: 0.01
-  minimumPivot: -10
-  maximumPivot: 10
+  minimumPivot: -15
+  maximumPivot: -15
   cameraSphereRadius: 0.2
   cameraCollisionOffset: 0.2
   minimumCollisionOffset: 0.2
@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84049358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.478, y: 0, z: -3.582}
+  m_LocalPosition: {x: 11.038, y: 0, z: -3.582}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13458,6 +13458,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3867060788003950160, guid: de6bf83f8ae5a174991fbbd948557c44, type: 3}
+      propertyPath: cameraHandler
+      value: 
+      objectReference: {fileID: 84049359}
     - target: {fileID: 3867060788003950161, guid: de6bf83f8ae5a174991fbbd948557c44, type: 3}
       propertyPath: cameraObject
       value: 
@@ -13480,7 +13484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3867060788003950253, guid: de6bf83f8ae5a174991fbbd948557c44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.56
       objectReference: {fileID: 0}
     - target: {fileID: 3867060788003950253, guid: de6bf83f8ae5a174991fbbd948557c44, type: 3}
       propertyPath: m_LocalPosition.y
