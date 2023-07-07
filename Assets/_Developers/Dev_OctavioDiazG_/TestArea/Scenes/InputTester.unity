@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 40107603}
   - component: {fileID: 40107602}
   - component: {fileID: 40107604}
+  - component: {fileID: 40107605}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -241,6 +242,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerLocomotion: {fileID: 40107602}
   m_playerInputManager: {fileID: 40107603}
+--- !u!114 &40107605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40107597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6e5c55f7d5e497285fb1880c89cf60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodgeHorizontalDistance: 10
 --- !u!1001 &207174471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1559,6 +1573,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 976607dc7ddbb43d28281525603239ec, type: 3}
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8358692394263699349, guid: 6f5d2dc653ad744b683a79f70e5de577, type: 3}
+  m_PrefabInstance: {fileID: 207174471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &443898605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1900,7 +1918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898095c6c65d84e5dab22e31c76b316c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 207174472}
   canRotate: 1
 --- !u!1 &1821452384
 GameObject:
