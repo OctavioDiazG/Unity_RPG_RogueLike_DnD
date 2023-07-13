@@ -13,10 +13,6 @@ public class Entity : MonoBehaviour
     public Animator anim { get; private set; }
     public GameObject aliveGo { get; private set; }
 
-
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private Transform ledgeCheck;
-
     public virtual void Start()
     {
         
@@ -50,5 +46,10 @@ public class Entity : MonoBehaviour
     public virtual bool CheckPlayerChase()
     {
         return Physics.CheckSphere(transform.position, entityData.playerCheckDistance, entityData.whatIsPlayer);
+    }
+    
+    public virtual bool CheckPlayerAttack()
+    {
+        return Physics.CheckSphere(transform.position, entityData.attackPlayerDistance, entityData.whatIsPlayer);
     }
 }

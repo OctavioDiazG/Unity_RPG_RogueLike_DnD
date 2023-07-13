@@ -722,11 +722,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 193e167e982e34c4cb92a5635493415b, type: 2}
-  wallCheck: {fileID: 1679049682}
-  ledgeCheck: {fileID: 1356973384}
   idleStateData: {fileID: 11400000, guid: 82a5f5aa42153024b9d447153ea9236b, type: 2}
   moveStateData: {fileID: 11400000, guid: eb0ac9f41b7af064db235a4b970aa8c7, type: 2}
   chaseStateData: {fileID: 11400000, guid: 01796659112aa6545b23a4fa6d2760dd, type: 2}
+  attackStateData: {fileID: 0}
 --- !u!1 &449187376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1180,7 @@ GameObject:
   - component: {fileID: 673496318}
   - component: {fileID: 673496317}
   - component: {fileID: 673496316}
+  - component: {fileID: 673496321}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -1282,6 +1282,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673496321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673496315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45fb3a6a95309c419f1051b9b25a128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 0
 --- !u!1 &675286284
 GameObject:
   m_ObjectHideFlags: 0
