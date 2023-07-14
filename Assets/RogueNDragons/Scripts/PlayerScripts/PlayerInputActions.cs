@@ -38,11 +38,20 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Dodge"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""641f68fa-366d-4031-9a80-a87d33d35105"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7cdcbb2d-cffa-4da1-a1a9-a706a279e9c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -163,6 +172,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a9d508e-b200-4523-b000-0788831f14fc"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3282dfda-1fb4-4cdc-a278-5e48e1f8747c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -315,6 +346,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_BasicMovement = asset.FindActionMap("BasicMovement", throwIfNotFound: true);
         m_BasicMovement_Movement = m_BasicMovement.FindAction("Movement", throwIfNotFound: true);
         m_BasicMovement_Dodge = m_BasicMovement.FindAction("Dodge", throwIfNotFound: true);
+        m_BasicMovement_Sprint = m_BasicMovement.FindAction("Sprint", throwIfNotFound: true);
         m_BasicMovement_Camera = m_BasicMovement.FindAction("Camera", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
@@ -385,6 +417,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IBasicMovementActions m_BasicMovementActionsCallbackInterface;
     private readonly InputAction m_BasicMovement_Movement;
     private readonly InputAction m_BasicMovement_Dodge;
+    private readonly InputAction m_BasicMovement_Sprint;
     private readonly InputAction m_BasicMovement_Camera;
     public struct BasicMovementActions
     {
@@ -392,6 +425,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public BasicMovementActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_BasicMovement_Movement;
         public InputAction @Dodge => m_Wrapper.m_BasicMovement_Dodge;
+        public InputAction @Sprint => m_Wrapper.m_BasicMovement_Sprint;
         public InputAction @Camera => m_Wrapper.m_BasicMovement_Camera;
         public InputActionMap Get() { return m_Wrapper.m_BasicMovement; }
         public void Enable() { Get().Enable(); }
@@ -408,6 +442,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
+                @Sprint.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
                 @Camera.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
@@ -421,6 +458,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
@@ -514,6 +554,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
     }
     public interface IInteractionActions

@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool wantsToPrimaryAttack;
     public bool wantsToSecondaryAttack;
     public bool wantsToDodge;
+    public bool wantsToSprint;
     public bool wantsToInteract;
     
     
@@ -22,7 +23,10 @@ public class PlayerInputManager : MonoBehaviour
     
     public bool b_input;
     public bool rollFlag;
+    public float rollInputTimer;
     public bool isInteracting;
+    
+    //float delta = Time.deltaTime;
     
     
 
@@ -78,6 +82,10 @@ public class PlayerInputManager : MonoBehaviour
         
         //Dodge
         playerInputs.BasicMovement.Dodge.performed += ctx => DodgeInput(ctx);
+        
+        //Sprint
+        playerInputs.BasicMovement.Sprint.performed += ctx => SprintInput(ctx);
+        playerInputs.BasicMovement.Sprint.canceled += ctx => CancelSprintInput(ctx);
 
         //Interact
         playerInputs.Interaction.Interact.performed += ctx => InteractInput(ctx);
@@ -100,10 +108,20 @@ public class PlayerInputManager : MonoBehaviour
     private void DodgeInput(InputAction.CallbackContext ctx)
     {
         StopCoroutine(CancelDodgeCoroutine());
+
         wantsToDodge = true;
         
-        Debug.Log("Dodge Button pressed DodgeInput");
         StartCoroutine(CancelDodgeCoroutine());
+    }
+    
+    private void SprintInput(InputAction.CallbackContext ctx)
+    {
+        wantsToSprint = true;
+    }
+    
+    private void CancelSprintInput(InputAction.CallbackContext ctx)
+    {
+        wantsToSprint = false;
     }
 
     IEnumerator CancelDodgeCoroutine()

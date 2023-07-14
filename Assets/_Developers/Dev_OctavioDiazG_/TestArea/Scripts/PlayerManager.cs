@@ -19,6 +19,6 @@ public class PlayerManager : MonoBehaviour
     void LateUpdate()
     {
         playerInputManager.isInteracting = anim.GetBool("isInteracting");
-        playerInputManager.wantsToDodge = false;
+
     }
 }

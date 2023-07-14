@@ -31,6 +31,8 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("Stats")] 
     [SerializeField] float movementSpeed = 5f;  //change speed for character speed
     [SerializeField] float rotationSpeed = 10f;
+    [SerializeField] float sprintSpeed = 10f;
+    public bool isSprinting = false;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -47,6 +49,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         float delta = Time.deltaTime;
         
+        isSprinting = playerInputManager.wantsToSprint;
         playerInputManager.TickInput(delta);
         HandleRotation(delta);
         HandleRollingAndSprinting(delta);
@@ -54,19 +57,32 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleMovement(float delta)
     {
-
         moveDirection = cameraObject.forward * playerInputManager.vertical;
         moveDirection += cameraObject.right * playerInputManager.horizontal;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
-        float speed = movementSpeed;    //change speed for character speed in. 
-        moveDirection *= speed;
+        float speed = movementSpeed;    //change speed for character speed in.
+        isSprinting = false;
+        if (playerInputManager.moveAmount!=0)
+        {
+            if (playerInputManager.wantsToSprint)
+            {
+                speed = sprintSpeed;
+                isSprinting = true;
+                moveDirection *= speed;
+            }
+            else
+            {
+                moveDirection *= speed;
+            }
+        }
+     
 
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;
 
-        animationHandler.UpdateAnimatorValues(playerInputManager.moveAmount, 0);
+        animationHandler.UpdateAnimatorValues(playerInputManager.moveAmount, 0, isSprinting);
 
         if (animationHandler.canRotate)
         {
@@ -110,7 +126,7 @@ public class PlayerLocomotion : MonoBehaviour
         Quaternion playerRotation = Quaternion.Slerp(myTransform.rotation, targetRotation, delta * rs);
         myTransform.rotation = playerRotation;
 
-        /*
+        /* as soon as tested we can delete this. 
         Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, cameraObject.transform.rotation.y, 0));
         targetDirection = Vector3.zero;
         Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
