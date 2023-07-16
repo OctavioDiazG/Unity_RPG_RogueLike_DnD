@@ -24,34 +24,23 @@ public class PlayerInputManager : MonoBehaviour
     public bool b_input;
     public bool rollFlag;
     public float rollInputTimer;
-    public bool isInteracting;
-    
+
     //float delta = Time.deltaTime;
     
     
 
     PlayerInputActions playerInputs;
-    public CameraHandler cameraHandler;
-    
+
     public Vector2 movementInput;
     public Vector2 cameraInput;
-
+    
     void Awake()
     {
         //cameraHandler = CameraHandler.singleton;
         playerInputs = new PlayerInputActions();
     }
-
-    private void LateUpdate()
-    {
-        float delta = Time.deltaTime;
-
-        if (cameraHandler != null)
-        {
-            cameraHandler.FollowTarget(delta);
-            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-        }
-    }
+    
+    
 
     private void OnEnable()
     {
