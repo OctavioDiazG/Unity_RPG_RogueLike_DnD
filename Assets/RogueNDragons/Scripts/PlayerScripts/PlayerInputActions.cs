@@ -330,7 +330,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""5a5a08a3-2e6b-4140-bda1-27fa0cecaa01"",
                     ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": ""Hold(duration=1)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DrawWeapon"",
