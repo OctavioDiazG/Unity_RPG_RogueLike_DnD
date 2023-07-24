@@ -13,12 +13,18 @@ public class Entity : MonoBehaviour
     public Animator anim { get; private set; }
     public GameObject aliveGo { get; private set; }
 
+    public TriggersController playerTrigger;
+    public TriggersController attackTrigger;
+
     public virtual void Start()
     {
         
         aliveGo = transform.Find("Alive").gameObject;
         anim = aliveGo.GetComponent<Animator>();
         agent = aliveGo.GetComponent<NavMeshAgent>();
+
+        playerTrigger.GetComponent<SphereCollider>().radius = entityData.playerCheckDistance;
+        attackTrigger.GetComponent<SphereCollider>().radius = entityData.attackPlayerDistance;
 
         stateMachine = new FiniteStateMachine();
     }
@@ -45,11 +51,11 @@ public class Entity : MonoBehaviour
 
     public virtual bool CheckPlayerChase()
     {
-        return Physics.CheckSphere(transform.position, entityData.playerCheckDistance, entityData.whatIsPlayer);
+        return playerTrigger.isTriggered;
     }
     
     public virtual bool CheckPlayerAttack()
     {
-        return Physics.CheckSphere(transform.position, entityData.attackPlayerDistance, entityData.whatIsPlayer);
+        return attackTrigger.isTriggered;
     }
 }
