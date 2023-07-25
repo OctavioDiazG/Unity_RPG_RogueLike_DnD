@@ -33,14 +33,16 @@ public class E1_MoveState : MoveState
         }
         
         
-        if (entity.CheckPlayerChase())
-        {
-            stateMachine.ChangeState(enemy.chaseState);
-        }
+        
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        
+        if (entity.CheckPlayerChase())
+        {
+            stateMachine.ChangeState(enemy.chaseState);
+        }
     }
 }

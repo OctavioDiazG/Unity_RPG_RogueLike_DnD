@@ -24,14 +24,20 @@ public class E1_ChaseState : ChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!entity.CheckPlayerChase())
-        {
-            stateMachine.ChangeState(enemy.idleState);
-        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        
+        if (!entity.CheckPlayerChase())
+        {
+            stateMachine.ChangeState(enemy.idleState);
+        }
+
+        if (entity.CheckPlayerAttack())
+        {
+            stateMachine.ChangeState(enemy.attackState);
+        }
     }
 }
