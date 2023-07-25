@@ -7,6 +7,7 @@ public class Boss1 : Entity
     public B1_IdleState idleState { get; private set; }
     public B1_MoveState moveState { get; private set; }
     public B1_ChaseState chaseState { get; private set; }
+    public B1_AttackState attackState { get; private set; }
     
     [SerializeField] private D_IdleState idleStateData;
     [SerializeField] private D_MoveState moveStateData;
