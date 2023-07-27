@@ -4,7 +4,7 @@ public class B1_MoveState : MoveState
 {
     private Boss1 enemy;
     
-    public B1_MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData)
+    public B1_MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, B_MoveState stateData, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData)
     {
         
     }

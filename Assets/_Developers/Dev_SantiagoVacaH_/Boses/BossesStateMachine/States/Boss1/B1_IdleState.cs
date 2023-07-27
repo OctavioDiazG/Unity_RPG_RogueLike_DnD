@@ -6,7 +6,7 @@ public class B1_IdleState : IdleState
 {
     private Boss1 enemy;
     
-    public B1_IdleState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_IdleState stateData, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData)
+    public B1_IdleState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, B_IdleState stateData, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
     }

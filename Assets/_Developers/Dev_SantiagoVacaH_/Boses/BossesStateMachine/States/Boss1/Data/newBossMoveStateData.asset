@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0d74a55e920e2448dfec7b5141ac02, type: 3}
-  m_Name: B1_BaseData
+  m_Script: {fileID: 11500000, guid: f041961c35725f742b08370e48bdac7b, type: 3}
+  m_Name: newBossMoveStateData
   m_EditorClassIdentifier: 
-  wallCheckDistance: 0.2
-  ledgeCheckDistance: 0.4
-  playerCheckDistance: 5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
+  movementSpeed: 3
+  walkRange: 10
