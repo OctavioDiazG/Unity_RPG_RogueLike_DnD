@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool wantsToPrimaryAttack;
     public bool wantsToSecondaryAttack;
     public bool wantsToDodge;
+    public bool wantsToSprint;
     public bool wantsToInteract;
     
     
@@ -22,32 +23,24 @@ public class PlayerInputManager : MonoBehaviour
     
     public bool b_input;
     public bool rollFlag;
-    public bool isInteracting;
+    public float rollInputTimer;
+
+    //float delta = Time.deltaTime;
     
     
 
     PlayerInputActions playerInputs;
-    private CameraHandler cameraHandler;
-    
+
     public Vector2 movementInput;
     public Vector2 cameraInput;
-
+    
     void Awake()
     {
-        cameraHandler = CameraHandler.singleton;
+        //cameraHandler = CameraHandler.singleton;
         playerInputs = new PlayerInputActions();
     }
-
-    private void FixedUpdate()
-    {
-        float delta = Time.fixedDeltaTime;
-
-        if (cameraHandler != null)
-        {
-            cameraHandler.FollowTarget(delta);
-            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-        }
-    }
+    
+    
 
     private void OnEnable()
     {
@@ -78,6 +71,10 @@ public class PlayerInputManager : MonoBehaviour
         
         //Dodge
         playerInputs.BasicMovement.Dodge.performed += ctx => DodgeInput(ctx);
+        
+        //Sprint
+        playerInputs.BasicMovement.Sprint.performed += ctx => SprintInput(ctx);
+        playerInputs.BasicMovement.Sprint.canceled += ctx => CancelSprintInput(ctx);
 
         //Interact
         playerInputs.Interaction.Interact.performed += ctx => InteractInput(ctx);
@@ -100,10 +97,20 @@ public class PlayerInputManager : MonoBehaviour
     private void DodgeInput(InputAction.CallbackContext ctx)
     {
         StopCoroutine(CancelDodgeCoroutine());
+
         wantsToDodge = true;
         
-        Debug.Log("Dodge Button pressed DodgeInput");
         StartCoroutine(CancelDodgeCoroutine());
+    }
+    
+    private void SprintInput(InputAction.CallbackContext ctx)
+    {
+        wantsToSprint = true;
+    }
+    
+    private void CancelSprintInput(InputAction.CallbackContext ctx)
+    {
+        wantsToSprint = false;
     }
 
     IEnumerator CancelDodgeCoroutine()
@@ -174,7 +181,7 @@ public class PlayerInputManager : MonoBehaviour
     
     void CameraInput(InputAction.CallbackContext context)
     {
-          cameraInput = context.ReadValue<Vector2>();   
+        cameraInput = Mouse.current.delta.ReadValue();
     }
 
     void MovementInputZero(InputAction.CallbackContext context)

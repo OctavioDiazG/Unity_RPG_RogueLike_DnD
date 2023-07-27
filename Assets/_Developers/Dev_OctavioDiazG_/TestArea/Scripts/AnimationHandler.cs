@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
+    private PlayerManager playerManager;
     public Animator anim;
     public PlayerInputManager playerInputManager;
     public PlayerLocomotion playerLocomotion;
@@ -17,11 +18,12 @@ public class AnimationHandler : MonoBehaviour
         anim = GetComponent<Animator>();
         playerInputManager = GetComponentInParent<PlayerInputManager>();
         playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        playerManager = GetComponentInParent<PlayerManager>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
     }
     
-    public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
+    public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
     {
         #region Vertical
         float v = 0;
@@ -72,9 +74,18 @@ public class AnimationHandler : MonoBehaviour
             h = 0;
         }
         #endregion
+
+        #region Sprinting
+        if (isSprinting)
+        {
+            //Debug.Log("Sprinting");
+            v = 2;
+            h = horizontalMovement;
+        }
+        #endregion
         
         anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-        anim.SetFloat(horizontal,h, 0.1f, Time.deltaTime);
+        anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
 
     public void PlayTargetAnimation(string targetAnim, bool isInteracting)
@@ -96,7 +107,7 @@ public class AnimationHandler : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if (playerInputManager.isInteracting == false) 
+        if (playerManager.isInteracting == false) 
             return;
         
         float delta = Time.deltaTime;

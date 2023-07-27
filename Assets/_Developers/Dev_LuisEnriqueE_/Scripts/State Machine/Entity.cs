@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     public NavMeshAgent agent { get; private set; }
     public Animator anim { get; private set; }
     public GameObject aliveGo { get; private set; }
+
     public TriggersController playerTrigger;
     public TriggersController attackTrigger;
 
