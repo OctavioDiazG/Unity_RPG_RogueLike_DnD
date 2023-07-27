@@ -9,10 +9,17 @@ public class PlayerLocomotion : MonoBehaviour
     PlayerInputManager playerInputManager;
     Vector3 moveDirection;
     
+    
+    [HideInInspector]
+    public IDodge Dodge;
     [HideInInspector]
     public Transform myTransform;
     [HideInInspector]
     public AnimationHandler animationHandler;
+    [HideInInspector]
+    public bool changeState = false;
+    
+    public Vector3 targetDirection = Vector3.zero;
     
     
     public new Rigidbody rigidbody;
@@ -27,6 +34,8 @@ public class PlayerLocomotion : MonoBehaviour
         animationHandler = GetComponentInChildren<AnimationHandler>();
         myTransform = transform;
         animationHandler.Initialize();
+        
+        Dodge = GetComponent<IDodge>();
     }
     
     /*public void Update()
@@ -56,6 +65,17 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
+    public void StateDelay(float time)
+    {
+        StartCoroutine(stateDelayCoroutine(time));
+    }
+
+    IEnumerator stateDelayCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+        changeState = true;
+    }
+
     #region Rotation
 
     Vector3 normalVector;
@@ -63,7 +83,7 @@ public class PlayerLocomotion : MonoBehaviour
     
     public void HandleRotation(float delta)
     {
-        Vector3 targetDirection = Vector3.zero;
+        targetDirection = Vector3.zero;
         Vector3 _input = new Vector3(playerInputManager.movementInput.x, 0, playerInputManager.movementInput.y);
         float moveOverride = playerInputManager.moveAmount;
         targetDirection = (transform.position + _input.ToIso()) - transform.position;
