@@ -16,9 +16,27 @@
                 },
                 {
                     "name": "Dodge",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "641f68fa-366d-4031-9a80-a87d33d35105",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "7cdcbb2d-cffa-4da1-a1a9-a706a279e9c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Camera",
+                    "type": "PassThrough",
+                    "id": "7688b7ce-6ce5-4464-b3e5-c369623deca7",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -37,7 +55,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "down",
+                    "name": "up",
                     "id": "f59951ef-d4a0-4e42-aa33-e99e6bdaaa16",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -48,7 +66,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "up",
+                    "name": "down",
                     "id": "409120e1-ab77-406c-8903-a5835ced3ccf",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -59,7 +77,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "left",
                     "id": "e96a171e-1c23-4d19-93a3-62f85545544f",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -70,7 +88,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
+                    "name": "right",
                     "id": "6d017a9b-ca9f-400e-bdbc-d994d88d9aa2",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -110,6 +128,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43f271f1-721e-42df-8c11-572706415f88",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4290463-a995-4008-bdf0-430a09a41c2d",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "NormalizeVector2",
+                    "groups": "",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a9d508e-b200-4523-b000-0788831f14fc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3282dfda-1fb4-4cdc-a278-5e48e1f8747c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -175,6 +237,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DrawWeapon",
+                    "type": "Button",
+                    "id": "93f545fd-75ac-41eb-ad12-2ccb7787b6bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -219,6 +290,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "345f0fc7-7205-4e30-a31b-b4651c4ca875",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrawWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a5a08a3-2e6b-4140-bda1-27fa0cecaa01",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrawWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
