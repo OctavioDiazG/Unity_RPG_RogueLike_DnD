@@ -38,11 +38,20 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Dodge"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""641f68fa-366d-4031-9a80-a87d33d35105"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7cdcbb2d-cffa-4da1-a1a9-a706a279e9c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -165,6 +174,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a9d508e-b200-4523-b000-0788831f14fc"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3282dfda-1fb4-4cdc-a278-5e48e1f8747c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -228,6 +259,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrawWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""93f545fd-75ac-41eb-ad12-2ccb7787b6bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,6 +314,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""345f0fc7-7205-4e30-a31b-b4651c4ca875"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a5a08a3-2e6b-4140-bda1-27fa0cecaa01"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -284,6 +346,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_BasicMovement = asset.FindActionMap("BasicMovement", throwIfNotFound: true);
         m_BasicMovement_Movement = m_BasicMovement.FindAction("Movement", throwIfNotFound: true);
         m_BasicMovement_Dodge = m_BasicMovement.FindAction("Dodge", throwIfNotFound: true);
+        m_BasicMovement_Sprint = m_BasicMovement.FindAction("Sprint", throwIfNotFound: true);
         m_BasicMovement_Camera = m_BasicMovement.FindAction("Camera", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
@@ -292,6 +355,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_LightAttack = m_Combat.FindAction("LightAttack", throwIfNotFound: true);
         m_Combat_HeavyAttack = m_Combat.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_Combat_DrawWeapon = m_Combat.FindAction("DrawWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -353,6 +417,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IBasicMovementActions m_BasicMovementActionsCallbackInterface;
     private readonly InputAction m_BasicMovement_Movement;
     private readonly InputAction m_BasicMovement_Dodge;
+    private readonly InputAction m_BasicMovement_Sprint;
     private readonly InputAction m_BasicMovement_Camera;
     public struct BasicMovementActions
     {
@@ -360,6 +425,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public BasicMovementActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_BasicMovement_Movement;
         public InputAction @Dodge => m_Wrapper.m_BasicMovement_Dodge;
+        public InputAction @Sprint => m_Wrapper.m_BasicMovement_Sprint;
         public InputAction @Camera => m_Wrapper.m_BasicMovement_Camera;
         public InputActionMap Get() { return m_Wrapper.m_BasicMovement; }
         public void Enable() { Get().Enable(); }
@@ -376,6 +442,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnDodge;
+                @Sprint.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnSprint;
                 @Camera.started -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_BasicMovementActionsCallbackInterface.OnCamera;
@@ -389,6 +458,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
@@ -435,12 +507,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private ICombatActions m_CombatActionsCallbackInterface;
     private readonly InputAction m_Combat_LightAttack;
     private readonly InputAction m_Combat_HeavyAttack;
+    private readonly InputAction m_Combat_DrawWeapon;
     public struct CombatActions
     {
         private @PlayerInputActions m_Wrapper;
         public CombatActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @LightAttack => m_Wrapper.m_Combat_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Combat_HeavyAttack;
+        public InputAction @DrawWeapon => m_Wrapper.m_Combat_DrawWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +530,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @HeavyAttack.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnHeavyAttack;
+                @DrawWeapon.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnDrawWeapon;
+                @DrawWeapon.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnDrawWeapon;
+                @DrawWeapon.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnDrawWeapon;
             }
             m_Wrapper.m_CombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -466,6 +543,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @HeavyAttack.started += instance.OnHeavyAttack;
                 @HeavyAttack.performed += instance.OnHeavyAttack;
                 @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @DrawWeapon.started += instance.OnDrawWeapon;
+                @DrawWeapon.performed += instance.OnDrawWeapon;
+                @DrawWeapon.canceled += instance.OnDrawWeapon;
             }
         }
     }
@@ -474,6 +554,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
@@ -484,5 +565,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnDrawWeapon(InputAction.CallbackContext context);
     }
 }
