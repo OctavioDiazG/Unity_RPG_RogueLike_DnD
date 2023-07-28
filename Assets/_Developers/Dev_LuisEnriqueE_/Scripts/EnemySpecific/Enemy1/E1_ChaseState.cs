@@ -37,6 +37,7 @@ public class E1_ChaseState : ChaseState
 
         if (entity.CheckPlayerAttack())
         {
+            Debug.Log("Chasse");
             stateMachine.ChangeState(enemy.attackState);
         }
     }

@@ -369,6 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2961247214877180619}
   - component: {fileID: 2961247214877180618}
+  - component: {fileID: 3606776023464879439}
   m_Layer: 0
   m_Name: Enemy dumy
   m_TagString: Untagged
@@ -411,6 +412,18 @@ MonoBehaviour:
   moveStateData: {fileID: 11400000, guid: eb0ac9f41b7af064db235a4b970aa8c7, type: 2}
   chaseStateData: {fileID: 11400000, guid: 01796659112aa6545b23a4fa6d2760dd, type: 2}
   attackStateData: {fileID: 11400000, guid: f1828b2c1ffab654ea1af1d9147028ef, type: 2}
+--- !u!114 &3606776023464879439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2961247214877180616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c8ed9e42cdc4949bb94b97c6fc468c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2961247214923882721
 GameObject:
   m_ObjectHideFlags: 0

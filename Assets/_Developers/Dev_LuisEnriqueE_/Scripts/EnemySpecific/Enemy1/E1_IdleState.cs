@@ -32,6 +32,7 @@ public class E1_IdleState : IdleState
 
         if (entity.CheckPlayerChase())
         {
+            Debug.Log("Chasse676");
             stateMachine.ChangeState(enemy.chaseState);
         }
     }
