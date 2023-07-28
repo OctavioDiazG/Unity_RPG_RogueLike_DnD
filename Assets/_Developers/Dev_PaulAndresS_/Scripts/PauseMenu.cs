@@ -45,4 +45,10 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
+    public void ResumeToGame()
+    {
+        PausePanel.SetActive(false);
+        Time.timeScale = 1;
+        isPaused = false;
+    }
 }
