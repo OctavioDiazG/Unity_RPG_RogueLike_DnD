@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c19e8d1ea0784e04f8101a310422cd07, type: 3}
-  m_Name: newBossIdleStateData
+  m_Script: {fileID: 11500000, guid: 08425a7b287a07d4f986de64b20eeb5e, type: 3}
+  m_Name: B1_AttackData
   m_EditorClassIdentifier: 
-  minIdleTime: 2
-  maxIdleTime: 3
+  heavyDamage: 10
+  lightDamage: 5
+  attackSpeed: 2
+  attackChanceHeavy: 1
+  attackChanceLight: 2
+  maxMissAttackChance: 3

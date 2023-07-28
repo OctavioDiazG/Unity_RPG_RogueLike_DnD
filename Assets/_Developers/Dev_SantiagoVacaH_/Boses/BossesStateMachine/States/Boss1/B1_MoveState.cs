@@ -6,7 +6,7 @@ public class B1_MoveState : MoveState
     
     public B1_MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, B_MoveState stateData, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData)
     {
-        
+        this.enemy = enemy;
     }
     
     public override void Enter()

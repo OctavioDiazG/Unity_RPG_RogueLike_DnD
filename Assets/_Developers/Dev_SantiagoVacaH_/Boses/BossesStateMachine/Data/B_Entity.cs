@@ -6,4 +6,5 @@ using UnityEngine;
 public class B_Entity : ScriptableObject
 {
     public float specialAttackDistance = 10f;
+    public int specialAttackDamage = 30;
 }

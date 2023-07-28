@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B_SpecialState : AttackState
+public class B1_SpecialState : AttackState
 {
     private Boss1 enemy;
-
+    private B_Entity bEntity;
     private int specialChance = 1;
     private int missAttackChance;
     private int maxMissAttackChance = 3;
 
-    public B_SpecialState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, B_AttackState stateData, PlayerDumy player, Boss1 enemy) : base(entity, stateMachine, animBoolName, stateData, player)
+    public B1_SpecialState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, B_AttackState stateData, PlayerDumy player, Boss1 enemy, B_Entity bEntity) : base(entity, stateMachine, animBoolName, stateData, player)
     {
         this.enemy = enemy;
+        this.bEntity = bEntity;
         missAttackChance = maxMissAttackChance;
     }
 
@@ -29,6 +30,17 @@ public class B_SpecialState : AttackState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        switch (CalculatePlayerHit())
+            {
+                case 0:
+                    //TODO: add an animation without dealing damage
+                    break;
+                
+                case 1:
+                    //TODO: change to the real function to take damage
+                    player.TakeDamege(bEntity.specialAttackDamage);
+                    break;
+            }
     }
 
     public override void PhysicsUpdate()
@@ -48,12 +60,7 @@ public class B_SpecialState : AttackState
             }
             return 0;
         }
-        else if (aux < missAttackChance + specialChance)
-        {
-            missAttackChance = maxMissAttackChance;
-            return 1;
-        }
         missAttackChance = maxMissAttackChance;
-        return 2;
+        return 1;
     }
 }
