@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     private void LateUpdate()
     {
         float delta = Time.deltaTime;
+        playerInputManager.wantsToPrimaryAttack = false;
 
         if (cameraHandler != null)
         {

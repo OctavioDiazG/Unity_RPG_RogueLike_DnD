@@ -356,7 +356,7 @@ PrefabInstance:
     - target: {fileID: 8358692394263699349, guid: 6f5d2dc653ad744b683a79f70e5de577, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 3a8c3a036dd83459990d4a10a4e5fd91, type: 2}
+      objectReference: {fileID: 22100000, guid: 206f71f3c58ee4e55b0616d23d52167a, type: 2}
     - target: {fileID: 8449538936953310827, guid: 6f5d2dc653ad744b683a79f70e5de577, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -922,6 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543901cdae0984cdaa5f9ff22f147c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dualWield: {fileID: 689208877}
 --- !u!114 &465083235 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6539550948912997363, guid: 8740fd22d0293d046a287e45e4b72fcb, type: 3}
@@ -970,6 +971,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c67d761716e3d41841fa4c9512cf39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &689208875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689208876}
+  - component: {fileID: 689208877}
+  m_Layer: 13
+  m_Name: DualWieldAnimOverrideController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &689208876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689208875}
+  m_LocalRotation: {x: 0.00000006955902, y: 0.00000002235174, z: 0.000000026394684, w: -1}
+  m_LocalPosition: {x: 88.96318, y: -136.09415, z: 3.4173992}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1781666451}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &689208877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689208875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8567c5cd1c4414d8b810f7dafe6932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - {fileID: 7400000, guid: aba51471d6e800946afe92e31cf5521c, type: 3}
+  - {fileID: 7400000, guid: d9f443632c38fe343a7060d72ab920df, type: 3}
+  - {fileID: 7400000, guid: 347deb13f172b5b418bf8b5c60941b68, type: 3}
+  - {fileID: 7400000, guid: b2bb66c5008180443807e8caab66458d, type: 3}
+  - {fileID: 7400000, guid: 6025efc237ce13f40973a8bdf1ea6c18, type: 3}
+  - {fileID: 7400000, guid: a1550f3512055cd4a95ecb62e3444617, type: 3}
+  - {fileID: 7400000, guid: 1efc9867c6a28c94eb872b7fcf7ddcb6, type: 3}
+  - {fileID: 7400000, guid: 687dffe2824275b44a08a3dd6e11f3d4, type: 3}
+  canBeDualWield: 0
+  isDualWield: 0
+  rightHandSlot: {fileID: 1243143699}
+  leftHandSlot: {fileID: 1781666452}
 --- !u!1001 &750278337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +1053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3980886698190101426, guid: 9154b022ded0c4ef4950c7d8405997ad, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3980886698190101426, guid: 9154b022ded0c4ef4950c7d8405997ad, type: 3}
       propertyPath: m_LocalScale.x
@@ -1320,7 +1378,9 @@ MonoBehaviour:
   parentOverride: {fileID: 1243143698}
   isRightHandSlot: 1
   isLeftHandSlot: 0
+  FistWeaponItem: {fileID: 0}
   currentWeaponModel: {fileID: 0}
+  dualWieldAnimationsOverride: {fileID: 689208877}
 --- !u!224 &1316830432 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2487908288706475052, guid: 8740fd22d0293d046a287e45e4b72fcb, type: 3}
@@ -1568,7 +1628,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1781666451}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 21.172, y: 165.484, z: -44.633}
 --- !u!1 &1781666450
 GameObject:
@@ -1599,6 +1659,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 689208876}
   - {fileID: 750278338}
   - {fileID: 1778116517}
   m_Father: {fileID: 330773888}
@@ -1619,7 +1680,9 @@ MonoBehaviour:
   parentOverride: {fileID: 1778116517}
   isRightHandSlot: 0
   isLeftHandSlot: 1
+  FistWeaponItem: {fileID: 0}
   currentWeaponModel: {fileID: 0}
+  dualWieldAnimationsOverride: {fileID: 689208877}
 --- !u!1 &1784078203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1701,7 @@ GameObject:
   - component: {fileID: 1784078211}
   - component: {fileID: 1784078212}
   - component: {fileID: 1784078213}
+  - component: {fileID: 1784078214}
   m_Layer: 13
   m_Name: Player (1)
   m_TagString: Untagged
@@ -1652,7 +1716,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784078203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f6e5c55f7d5e497285fb1880c89cf60, type: 3}
   m_Name: 
@@ -1816,6 +1880,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: cd11e915a6a4e4517aa417c53dc90159, type: 2}
   leftWeapon: {fileID: 11400000, guid: cd11e915a6a4e4517aa417c53dc90159, type: 2}
+--- !u!114 &1784078214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784078203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5433ee95beb534b02bec6aabadd0df1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1804115899 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6539550948912997363, guid: 8740fd22d0293d046a287e45e4b72fcb, type: 3}

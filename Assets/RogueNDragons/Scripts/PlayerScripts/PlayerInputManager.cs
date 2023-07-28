@@ -11,6 +11,9 @@ public class PlayerInputManager : MonoBehaviour
     public bool wantsToDodge;
     public bool wantsToSprint;
     public bool wantsToInteract;
+
+    private PlayerAttacker playerAttacker;
+    PlayerInventory playerInventory;
     
     
     
@@ -38,6 +41,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         //cameraHandler = CameraHandler.singleton;
         playerInputs = new PlayerInputActions();
+        playerAttacker = GetComponent<PlayerAttacker>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
     
     
@@ -149,7 +154,9 @@ public class PlayerInputManager : MonoBehaviour
     {
         StopCoroutine(CancelLightAttackCoroutine());
         wantsToPrimaryAttack = true;
+        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
         StartCoroutine(CancelLightAttackCoroutine());
+        
     }
 
     IEnumerator CancelLightAttackCoroutine()
@@ -163,6 +170,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         StopCoroutine(CancelHeavyAttackCoroutine());
         wantsToSecondaryAttack = true;
+        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
         Debug.Log("Heavy");
         StartCoroutine(CancelHeavyAttackCoroutine());
     }
